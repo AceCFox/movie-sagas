@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
+import {HashRouter as Router, Route, Link} from 'react-router-dom';
+import MovieList from './MovieList/MovieList'
+import Details from './Details/Details'
+import Edit from './Edit/Edit'
 
 class App extends Component {
   // calls saga with GET on page load
@@ -12,7 +16,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-       <p>{JSON.stringify(this.props.reduxState)}</p>
+        <Router>
+          <Route exact path = "/" component = {MovieList}/> 
+          <Route path="/details/:id" component={Details} />
+          <Route path='/edit/:id' component={Edit} />
+        </Router>
       </div>
     );
   }
