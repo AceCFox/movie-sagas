@@ -12,9 +12,11 @@ class MovieItem extends Component {
   // Renders the entire app on the DOM
   render() {
     return (
-      <div className="MovieList">
-       <p>Hi Im a movie!</p>
-      </div>
+      <tr>
+        <td><img src = {this.props.movie.poster} alt = {this.props.movie.title}/></td>
+        <td>{this.props.movie.title}</td>
+        <td>{this.props.movie.description}</td>
+    </tr>
     );
   }
 }

@@ -12,8 +12,21 @@ class MovieList extends Component {
   // Renders the entire app on the DOM
   render() {
     return (
-      <div className="MovieList">
-       <p>{JSON.stringify(this.props.reduxState. movies)}</p>
+      <div className="Movies">
+        <table className = "MovieList">
+        <thead>
+            <tr>
+                <td> Poster</td>
+                <td> Title</td>
+                <td>Description</td>
+                <td>Genres</td>
+            </tr>
+        </thead>
+        <tbody>
+            {this.props.reduxState.movies.map (movie =>
+                <MovieItem movie={movie}/>)}
+        </tbody>  
+        </table>  
       </div>
     );
   }
