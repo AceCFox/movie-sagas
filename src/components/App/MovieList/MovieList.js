@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {HashRouter as Router, Route, Link} from 'react-router-dom';
+//import {HashRouter as Router, Route, Link} from 'react-router-dom';
 import MovieItem from '../MovieItem/MovieItem'
 
 class MovieList extends Component {
@@ -23,8 +23,9 @@ class MovieList extends Component {
             </tr>
         </thead>
         <tbody>
+            {/* Making a new instance of the MovieItem component for each film */}
             {this.props.reduxState.movies.map (movie =>
-                <MovieItem movie={movie}/>)}
+                <MovieItem movie={movie} key = {movie.id}/>)}
         </tbody>  
         </table>  
       </div>
