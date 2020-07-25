@@ -16,15 +16,12 @@ import axios from 'axios';
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIE', getMovies);
+    yield takeEvery('FETCH_GENRE', getGenres);
 }
-
-// Create sagaMiddleware
-const sagaMiddleware = createSagaMiddleware();
-
 //Saga to get the movies from the database
 function* getMovies(){
     try{
-        //axios call to get movies on route /
+        //axios call to get movies on route /movie
         const response = yield axios.get('/movie');
          yield put({type:'SET_MOVIES', payload: response.data});
     } catch (error){
@@ -32,6 +29,22 @@ function* getMovies(){
         console.log('Error on GET:', error);
     }//end axios
 }//end getMovies
+
+//Saga to get the movies from the database
+function* getGenres(action){
+    console.log('in getGenres', action.payload)
+    try{
+        //axios call to get movies on route /genre
+        const response = yield axios.get('/genre'+ action.payload);
+        yield put({type:'SET_GENRES', payload: response.data});
+    } catch (error){
+        alert('unable to access server at this time');
+        console.log('Error on genre GET:', error);
+    }//end axios
+}//end getMovies
+
+// Create sagaMiddleware
+const sagaMiddleware = createSagaMiddleware();
 
 
 // Used to store movies returned from the server

@@ -19,7 +19,7 @@ class MovieItem extends Component {
             <img src = {this.props.movie.poster} alt = {this.props.movie.title}/>
             </Link>
         </td>
-        <td>{this.props.movie.title}</td>
+        <td><h3>{this.props.movie.title}</h3></td>
         <td>{this.props.movie.description}</td>
     </tr>
     );
