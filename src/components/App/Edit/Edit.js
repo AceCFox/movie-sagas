@@ -1,6 +1,41 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Button from '@material-ui/core/Button';
 import {HashRouter as Link} from 'react-router-dom';
+import CloseIcon from '@material-ui/icons/Close';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import TextField from '@material-ui/core/TextField';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+
+const styles = theme => ({
+    root: {
+        flexGrow: 1,
+      },
+      paper: {
+        padding: theme.spacing.unit * 2,
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+      },
+    container: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    textField: {
+      marginLeft: theme.spacing.unit,
+      marginRight: theme.spacing.unit,
+      width: '80%',
+    },
+    dense: {
+      marginTop: 19,
+    },
+    menu: {
+      width: 200,
+    },
+  });
 
 
 class Edit extends Component {
@@ -67,40 +102,66 @@ class Edit extends Component {
   
   // Renders the entire app on the DOM
   render() {
-    return (
-    <div>
-        <h1>Edit page!</h1>
-        <button onClick = {this.navBack}>cancel</button>
-        <br/>
-        <br/>
-        <label>title:</label>
-        <input type = "text"
-            onChange = {this.changeTitle}
-            value = {this.state.title}/>
-        <br/>
-        <br/>
-        <label>description:</label>
-        <br></br>
-        <textarea
-            onChange = {this.changeDescription}
-            value = {this.state.description}
-            rows ={8}
-            cols ={18}/>
-        <br/>
-        <button onClick = {this.handleSubmit}>Save Changes</button>
-        <h3>Genres:</h3>
-         <ul className = 'genreList'>
-            {/* Mapping through the genres to display a list*/}
-            {this.props.reduxState.genres.map(genre =>
-                <li key ={genre.id}>{genre.name}</li>)}
-        </ul> 
-    </div>
+    const { classes } = this.props;
+    return ( 
+    <Grid container spacing={24} justify="center"
+        alignItems="flex-start">
+        <Grid item xs = "12" sm = "9">
+            <Paper className={classes.paper}>
+                <h2>edit movie</h2>
+                <Button color = "secondary" variant = "outlined" onClick = {this.navBack}>
+                    <CloseIcon/> cancel
+                </Button>
+                <br/>
+                <br/>
+                <TextField
+                    label="title"
+                    variant = "filled"
+                    className={classes.textField}
+                    value={this.state.title}
+                    onChange={this.changeTitle}
+                    margin="normal"
+                    defaultValue = "title"
+                />
+                <br/>
+                <br/>
+                <br></br>
+                <TextField
+                    label="Description"
+                    multiline
+                    rows="16"
+                    className={classes.textField}
+                    margin="normal"
+                    variant="filled"
+                    color = "light"
+                    onChange = {this.changeDescription}
+                    value = {this.state.description}
+                    defaultValue = 'description'
+                />
+                <br/>
+                <br/>
+                <Button variant = "contained" color = "primary" onClick = {this.handleSubmit}>
+                    <CheckCircleIcon/> Save Changes
+                </Button>
+                <h3>Genres:</h3>
+                <ul className = 'genreList'>
+                    {/* Mapping through the genres to display a list*/}
+                    {this.props.reduxState.genres.map(genre =>
+                        <li key ={genre.id}>{genre.name}</li>)}
+                </ul> 
+            </Paper>
+        </Grid>
+    </Grid>
     );
   }
 }
+
+Edit.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
 
 const mapStateToProps = reduxState => ({
   reduxState,
 });
 
-export default connect(mapStateToProps)(Edit);
+export default  withStyles(styles)(connect(mapStateToProps)(Edit));
