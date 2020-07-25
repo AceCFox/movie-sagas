@@ -1,6 +1,11 @@
-.App {
+body {
   text-align: center;
+  background-color: #7f5a83;
+  background-image: linear-gradient(315deg, #7f5a83 0%, #0d324d 74%);
+  color: white;
+  height: 100%;
 }
+
 
 
 .App-header {
@@ -21,4 +26,10 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+
+
+html{
+  min-height: 100%;
 }
