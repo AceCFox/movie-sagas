@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import Fade from 'react-reveal/Fade'
 
 const styles = theme => ({
     root: {
@@ -50,26 +51,28 @@ class Details extends Component {
   render() {
     const { classes } = this.props;
     return (
-        <Grid container spacing={24} justify="center"
-            alignItems="flex-start">
-            <Grid item xs = "12" sm = "9">
-                <Paper className={classes.paper}>
-                    <Button color = "secondary" onClick = {this.navBack}>Return to List</Button>
-                    {'\u00A0'} {'\u00A0'} {'\u00A0'}
-                    <Button color = "secondary" onClick = {this.navEdit}>Edit</Button>
-                    <h2>{this.state.title}</h2>
-                    <img src= {this.state.poster} alt = {this.state.title}/>
-                    <h3>Description:</h3>
-                    <p>{this.state.description}</p>
-                    <h3>Genres:</h3>
-                    <ul className = 'genreList'>
-                        {/* Mapping through the genres to display a list*/}
-                        {this.props.reduxState.genres.map(genre =>
-                            <li key ={genre.id}>{genre.name}</li>)}
-                    </ul>
-                </Paper>
+        <Fade left>
+            <Grid container spacing={24} justify="center"
+                alignItems="flex-start">
+                <Grid item xs = "12" sm = "9">
+                    <Paper className={classes.paper}>
+                        <Button color = "secondary" onClick = {this.navBack}>Return to List</Button>
+                        {'\u00A0'} {'\u00A0'} {'\u00A0'}
+                        <Button color = "secondary" onClick = {this.navEdit}>Edit</Button>
+                        <h2>{this.state.title}</h2>
+                        <img src= {this.state.poster} alt = {this.state.title}/>
+                        <h3>Description:</h3>
+                        <p>{this.state.description}</p>
+                        <h3>Genres:</h3>
+                        <ul className = 'genreList'>
+                            {/* Mapping through the genres to display a list*/}
+                            {this.props.reduxState.genres.map(genre =>
+                                <li key ={genre.id}>{genre.name}</li>)}
+                        </ul>
+                    </Paper>
+                </Grid>
             </Grid>
-        </Grid>
+        </Fade>
     );
   }
 }

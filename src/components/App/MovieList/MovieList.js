@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import Fade from 'react-reveal/Fade'
 
 const styles = theme => ({
     root: {
@@ -32,7 +33,7 @@ class MovieList extends Component {
   render() {
     const {classes} = this.props;
     return (
-     
+     <Fade down>
         <div className={classes.root}>
             <Grid container spacing={16}>
                 <Grid item xs = {12}>
@@ -45,7 +46,8 @@ class MovieList extends Component {
                 <MovieItem movie={movie} key = {movie.id}/>)}
                 </Grid>
             </Grid>  
-      </div>
+        </div>
+      </Fade>
     );
   }
 }

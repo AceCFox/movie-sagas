@@ -10,6 +10,7 @@ import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import Fade from 'react-reveal/Fade'
 
 const styles = theme => ({
     root: {
@@ -104,54 +105,56 @@ class Edit extends Component {
   render() {
     const { classes } = this.props;
     return ( 
-    <Grid container spacing={24} justify="center"
-        alignItems="flex-start">
-        <Grid item xs = "12" sm = "9">
-            <Paper className={classes.paper}>
-                <h2>edit movie</h2>
-                <Button color = "secondary" variant = "outlined" onClick = {this.navBack}>
-                    <CloseIcon/> cancel
-                </Button>
-                <br/>
-                <br/>
-                <TextField
-                    label="title"
-                    variant = "filled"
-                    className={classes.textField}
-                    value={this.state.title}
-                    onChange={this.changeTitle}
-                    margin="normal"
-                    defaultValue = "title"
-                />
-                <br/>
-                <br/>
-                <br></br>
-                <TextField
-                    label="Description"
-                    multiline
-                    rows="16"
-                    className={classes.textField}
-                    margin="normal"
-                    variant="filled"
-                    color = "light"
-                    onChange = {this.changeDescription}
-                    value = {this.state.description}
-                    defaultValue = 'description'
-                />
-                <br/>
-                <br/>
-                <Button variant = "contained" color = "primary" onClick = {this.handleSubmit}>
-                    <CheckCircleIcon/> Save Changes
-                </Button>
-                <h3>Genres:</h3>
-                <ul className = 'genreList'>
-                    {/* Mapping through the genres to display a list*/}
-                    {this.props.reduxState.genres.map(genre =>
-                        <li key ={genre.id}>{genre.name}</li>)}
-                </ul> 
-            </Paper>
+    <Fade left>
+        <Grid container spacing={24} justify="center"
+            alignItems="flex-start">
+            <Grid item xs = "12" sm = "9">
+                <Paper className={classes.paper}>
+                    <h2>edit movie</h2>
+                    <Button color = "secondary" variant = "outlined" onClick = {this.navBack}>
+                        <CloseIcon/> cancel
+                    </Button>
+                    <br/>
+                    <br/>
+                    <TextField
+                        label="title"
+                        variant = "filled"
+                        className={classes.textField}
+                        value={this.state.title}
+                        onChange={this.changeTitle}
+                        margin="normal"
+                        defaultValue = "title"
+                    />
+                    <br/>
+                    <br/>
+                    <br></br>
+                    <TextField
+                        label="Description"
+                        multiline
+                        rows="16"
+                        className={classes.textField}
+                        margin="normal"
+                        variant="filled"
+                        color = "light"
+                        onChange = {this.changeDescription}
+                        value = {this.state.description}
+                        defaultValue = 'description'
+                    />
+                    <br/>
+                    <br/>
+                    <Button variant = "contained" color = "primary" onClick = {this.handleSubmit}>
+                        <CheckCircleIcon/> Save Changes
+                    </Button>
+                    <h3>Genres:</h3>
+                    <ul className = 'genreList'>
+                        {/* Mapping through the genres to display a list*/}
+                        {this.props.reduxState.genres.map(genre =>
+                            <li key ={genre.id}>{genre.name}</li>)}
+                    </ul> 
+                </Paper>
+            </Grid>
         </Grid>
-    </Grid>
+    </Fade>
     );
   }
 }
