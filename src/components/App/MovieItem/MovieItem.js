@@ -61,6 +61,12 @@ class MovieItem extends Component {
                 <Paper className={classes.paper}>
                 <h3>{this.props.movie.title}</h3>
                 <p>{this.props.movie.description}</p>
+                <h4>Genres:</h4>
+                <ul className='genreList'>
+                {/* {JSON.stringify(this.props.movie.genres)} */}
+                {this.props.movie.genres.map((genre, index)=>
+                    (<li key = {index}>{genre}</li>))}
+                </ul>
                 </Paper>
             </Grid>
         </Grid>

@@ -16,21 +16,24 @@ const styles = theme => ({
       textAlign: 'center',
       color: theme.palette.text.secondary,
     },
-
   });
 
 class Details extends Component {
-  state = {}
+    state = {}
 
   componentDidMount(){
+    this.props.dispatch({ type: 'FETCH_MOVIE'});
     const id = this.props.match.params.id
-    //this.props.dispatch({type: 'FETCH_MOVIE'});
-    //this.movieDetailsOnProps(id);
+    //populate the details reducer if it is empty
+    console.log('current detail reducer:', this.props.reduxState.details)
+    if(this.props.reduxState.details === {}){
+        this.movieDetailsOnProps(id);}
     //dispatch the GET genre saga with our movie id
     this.props.dispatch({ type: 'FETCH_GENRE', payload:id });
   }//end ComponentDidMount
 
-  movieDetailsOnProps = (id) =>{
+  movieDetailsOnProps = (id) =>{  
+    console.log('in movieDetailsOnProps')
     const movies = this.props.reduxState.movies;
     //looping through the movies array to find which one we clicked on,
     //and dispatches its info to the details reducer so we can access it on refresh
@@ -55,6 +58,8 @@ class Details extends Component {
   
   // Renders the entire app on the DOM
   render() {
+    if(this.props.reduxState.details === {}){
+        this.movieDetailsOnProps(this.props.match.params.id);}
     const { classes } = this.props;
     return (
         <Fade left>

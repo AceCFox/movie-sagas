@@ -11,7 +11,13 @@ app.use(express.static('build'));
 /** ---------- ROUTES ---------- **/
 app.get('/movie', (req, res) => {
     // return all movies
-    const queryText = `SELECT * FROM "movies" ORDER BY "id" ASC;`;
+    const queryText = 
+    `Select"title", "description", "poster", "movies"."id", array_agg(name) "genres" 
+    FROM "movies"
+    JOIN "movie_genre" on "movies"."id" = "movie_genre"."movie_id"
+    JOIN "genres" on "movie_genre"."genre_id" = "genres"."id"
+    GROUP BY "movies"."id"
+    ORDER BY "movies"."id" ASC;`;
     pool.query(queryText)
         .then( (result) => {
             res.send(result.rows);
