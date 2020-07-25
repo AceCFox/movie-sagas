@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
-import {HashRouter as Link} from 'react-router-dom';
 import CloseIcon from '@material-ui/icons/Close';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -40,27 +38,16 @@ const styles = theme => ({
 
 
 class Edit extends Component {
-  state = {};
+  state = {title: '', 
+    description: ''};
 
   componentDidMount(){
     const id = this.props.match.params.id;
-    this.setMovieToState();
+    this.setState(this.props.reduxState.details);
+    //this.setMovieToState();
     //dispatch the GET genre saga with our movie id
     this.props.dispatch({ type: 'FETCH_GENRE', payload:id });
   }//end ComponentDidMount
-
-  setMovieToState = () =>{
-    const movies = this.props.reduxState.movies;
-    const id = this.props.match.params.id;
-    //looping through the movies array to find which one we clicked on,
-    //and set its info to state so we can access it in return
-    for (let i=0; i<movies.length; i++){
-        if (movies[i].id === Number(id) ){
-           // console.log(movies[i].title);
-            this.setState(movies[i]);
-        }//end if
-    }//end for
-  }//end setMovieTo State
 
   navBack = (event) =>{
       //history.push will move our dom to the '/details:id' page
@@ -89,14 +76,8 @@ class Edit extends Component {
 
   handleSubmit = (event) => {
       console.log(this.state);
-      const updateObject = {
-          title: this.state.title, 
-          description: this.state.description,
-          id: this.state.id
-        };
       //dispatch a saga that makes a PUT call with the above info
       this.props.dispatch({ type: 'EDIT_MOVIE', payload:this.state });
-      this.setMovieToState();
       this.navBack(event);
   }//end handleSubmit
 
@@ -108,7 +89,7 @@ class Edit extends Component {
     <Fade left>
         <Grid container spacing={24} justify="center"
             alignItems="flex-start">
-            <Grid item xs = "12" sm = "9">
+            <Grid item xs = {12} sm = {9}>
                 <Paper className={classes.paper}>
                     <h2>edit movie</h2>
                     <Button color = "secondary" variant = "outlined" onClick = {this.navBack}>
@@ -123,7 +104,6 @@ class Edit extends Component {
                         value={this.state.title}
                         onChange={this.changeTitle}
                         margin="normal"
-                        defaultValue = "title"
                     />
                     <br/>
                     <br/>
@@ -138,7 +118,6 @@ class Edit extends Component {
                         color = "light"
                         onChange = {this.changeDescription}
                         value = {this.state.description}
-                        defaultValue = 'description'
                     />
                     <br/>
                     <br/>

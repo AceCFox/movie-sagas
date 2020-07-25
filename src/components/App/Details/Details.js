@@ -23,19 +23,25 @@ class Details extends Component {
   state = {}
 
   componentDidMount(){
-    const movies = this.props.reduxState.movies;
     const id = this.props.match.params.id
-    //looping through the movies array to find which one we clicked on,
-    //and set its info to state so we can access it in return
-    for (let i=0; i<movies.length; i++){
-        if (movies[i].id === Number(id) ){
-           // console.log(movies[i].title);
-            this.setState(movies[i]);
-        }//end if
-    }//end for
+    //this.props.dispatch({type: 'FETCH_MOVIE'});
+    //this.movieDetailsOnProps(id);
     //dispatch the GET genre saga with our movie id
     this.props.dispatch({ type: 'FETCH_GENRE', payload:id });
   }//end ComponentDidMount
+
+  movieDetailsOnProps = (id) =>{
+    const movies = this.props.reduxState.movies;
+    //looping through the movies array to find which one we clicked on,
+    //and dispatches its info to the details reducer so we can access it on refresh
+    for (let i=0; i<movies.length; i++){
+        if (movies[i].id === Number(id) ){
+           // console.log(movies[i].title);
+           this.props.dispatch({type: 'SET_DETAILS', payload:movies[i]})
+           // this.setState(movies[i]);
+        }//end if
+    }//end for
+  }
 
   navBack = (event) =>{
       //history.push will move our dom to the '/' page
@@ -54,15 +60,15 @@ class Details extends Component {
         <Fade left>
             <Grid container spacing={24} justify="center"
                 alignItems="flex-start">
-                <Grid item xs = "12" sm = "9">
+                <Grid item xs = {12} sm = {9}>
                     <Paper className={classes.paper}>
                         <Button color = "secondary" onClick = {this.navBack}>Return to List</Button>
                         {'\u00A0'} {'\u00A0'} {'\u00A0'}
                         <Button color = "secondary" onClick = {this.navEdit}>Edit</Button>
-                        <h2>{this.state.title}</h2>
-                        <img src= {this.state.poster} alt = {this.state.title}/>
+                        <h1>{this.props.reduxState.details.title}</h1>
+                        <img src= {this.props.reduxState.details.poster} alt = {this.props.reduxState.details.title}/>
                         <h3>Description:</h3>
-                        <p>{this.state.description}</p>
+                        <p>{this.props.reduxState.details.description}</p>
                         <h3>Genres:</h3>
                         <ul className = 'genreList'>
                             {/* Mapping through the genres to display a list*/}

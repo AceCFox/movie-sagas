@@ -19,6 +19,20 @@ const styles = theme => ({
 
 
 class MovieItem extends Component {
+
+    movieDetailsOnProps = () =>{
+        const id = this.props.movie.id;
+        const movies = this.props.reduxState.movies;
+        //looping through the movies array to find which one we clicked on,
+        //and dispatches its info to the details reducer so we can access it on refresh
+        for (let i=0; i<movies.length; i++){
+            if (movies[i].id === Number(id) ){
+               // console.log(movies[i].title);
+               this.props.dispatch({type: 'SET_DETAILS', payload:movies[i]})
+               // this.setState(movies[i]);
+            }//end if
+        }//end for
+      }
   
   componentDidMount(){
     
@@ -35,9 +49,11 @@ class MovieItem extends Component {
                     sm = {6}
                     md={3}>
                 <Paper className={classes.paper}>
-                <Link to={detailsRoute}>
-            <img src = {this.props.movie.poster} alt = {this.props.movie.title}/>
-            </Link>
+                    <Link to={detailsRoute}>
+                        <img src = {this.props.movie.poster} 
+                            alt = {this.props.movie.title} 
+                            onClick ={this.movieDetailsOnProps}/>
+                     </Link>
                 </Paper>
             </Grid>
             <Grid item xs = {12}

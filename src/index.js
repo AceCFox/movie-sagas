@@ -50,6 +50,7 @@ function* editMovie(action){
     try{
         //axios call to get movies on route /genre
         const response = yield axios.put('/movie'+ action.payload.id, {payload: action.payload});
+        console.log('edit response:', response);
         yield put({type:'FETCH_MOVIE'});
     } catch (error){
         alert('unable to access server at this time');
@@ -81,11 +82,23 @@ const genres = (state = [], action) => {
     }
 }
 
+// Used to store a specific movie's infor for details page
+const details = (state = {}, action) => {
+    switch (action.type) {
+        case 'SET_DETAILS':
+            console.log(action.payload)
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
+        details
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
