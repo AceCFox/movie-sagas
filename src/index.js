@@ -17,6 +17,7 @@ import axios from 'axios';
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIE', getMovies);
     yield takeEvery('FETCH_GENRE', getGenres);
+    yield takeEvery('EDIT_MOVIE', editMovie);
 }
 //Saga to get the movies from the database
 function* getMovies(){
@@ -42,6 +43,19 @@ function* getGenres(action){
         console.log('Error on genre GET:', error);
     }//end axios
 }//end getMovies
+
+//saga to put/update movie on edit
+function* editMovie(action){
+    console.log(action.payload.id, action.payload.title, action.payload.description);
+    try{
+        //axios call to get movies on route /genre
+        const response = yield axios.put('/movie'+ action.payload.id, {payload: action.payload});
+        yield put({type:'FETCH_MOVIE'});
+    } catch (error){
+        alert('unable to access server at this time');
+        console.log('Error on movie edit PUT:', error);
+    }//end axios
+}//end editMovie
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();

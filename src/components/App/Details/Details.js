@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-//import {HashRouter as Link, Router} from 'react-router-dom';
+//import {HashRouter as Link} from 'react-router-dom';
 
 
 class Details extends Component {
@@ -12,25 +12,32 @@ class Details extends Component {
     //looping through the movies array to find which one we clicked on,
     //and set its info to state so we can access it in return
     for (let i=0; i<movies.length; i++){
-        if (movies[i].id == id ){
+        if (movies[i].id === Number(id) ){
            // console.log(movies[i].title);
             this.setState(movies[i]);
         }//end if
     }//end for
     //dispatch the GET genre saga with our movie id
-    this.props.dispatch({ type: 'FETCH_GENRE', payload:id })
+    this.props.dispatch({ type: 'FETCH_GENRE', payload:id });
   }//end ComponentDidMount
 
-  handleClick = (event) =>{
-      console.log('clicked');
+  navBack = (event) =>{
+      //history.push will move our dom to the '/' page
       this.props.history.push('/')
   }
+
+  navEdit = () =>{
+    this.props.history.push('/edit/' + this.props.match.params.id)
+  }
+
   
   // Renders the entire app on the DOM
   render() {
     return (
     <div>
-        <button onClick = {this.handleClick}>Return to List</button>
+       <button onClick = {this.navBack}>Return to List</button>
+       {'\u00A0'} {'\u00A0'} {'\u00A0'}
+       <button onClick = {this.navEdit}>Edit</button>
        <h2>{this.state.title}</h2>
        <img src= {this.state.poster} alt = {this.state.title}/>
        <h3>Description:</h3>

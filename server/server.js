@@ -25,7 +25,9 @@ app.get('/movie', (req, res) => {
 app.get('/genre:id', (req,res)=>{
     //return all genres for a movie, based on movie id
     console.log('in genre GET', req.params.id)
-    const queryString = `Select"genres"."name", "genres"."id" FROM "movies"
+    const queryString = 
+        `SELECT "genres"."name", "genres"."id" 
+        FROM "movies"
         JOIN "movie_genre" on "movies"."id" = "movie_genre"."movie_id"
         JOIN "genres" on "movie_genre"."genre_id" = "genres"."id"
         WHERE "movies"."id" = $1;`
@@ -38,6 +40,26 @@ app.get('/genre:id', (req,res)=>{
         res.sendStatus(500);
     });//end query  
 })//end genre:id.get
+
+app.put('/movie:id', (req,res)=>{
+    //return all genres for a movie, based on movie id
+    console.log('in movie PUT', req.params.id, req.body.payload.title);
+    const queryString = 
+        `UPDATE "movies"
+        SET "title" = $1,
+        "description" = $2
+        WHERE id = $3;`
+    pool.query( queryString, [ req.body.payload.title,
+         req.body.payload.description, 
+         req.params.id ] )
+    .then( (result) => {
+        res.sendStatus(201);
+    })
+    .catch( (error) => {
+        console.log(`Error on genre get: ${error}`);
+        res.sendStatus(500);
+    });//end query  
+})//end /movie:id PUT
 
 /** ---------- START SERVER ---------- **/
 app.listen(port, function () {
