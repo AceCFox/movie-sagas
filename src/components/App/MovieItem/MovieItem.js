@@ -8,12 +8,12 @@ import Paper from '@material-ui/core/Paper';
 
 const styles = theme => ({
     root: {
-      flexGrow: 1,
+        flexGrow: 1,
     },
     paper: {
-      padding: theme.spacing.unit * 2,
-      textAlign: 'center',
-      color: theme.palette.text.secondary,
+        padding: theme.spacing.unit * 2,
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
     },
   });
 
@@ -44,10 +44,11 @@ class MovieItem extends Component {
     let detailsRoute = '/details/' + this.props.movie.id;
     return (
         <>
-        <Grid container spacing={16} key ={this.props.movie.id} >
-            <Grid item xs = {12}
-                    sm = {6}
-                    md={3}>
+        <Grid container spacing={16} key ={this.props.movie.id} 
+            direction="row"
+            justify="center"
+            alignItems="center">
+            <Grid item xs = {12} sm = {12} md={3}>
                 <Paper className={classes.paper}>
                     <Link to={detailsRoute}>
                         <img src = {this.props.movie.poster} 
@@ -56,18 +57,21 @@ class MovieItem extends Component {
                      </Link>
                 </Paper>
             </Grid>
-            <Grid item xs = {12}
-            sm={6} md ={9}>
+            <Grid item xs = {12} sm={8} md ={6}>
                 <Paper className={classes.paper}>
-                <h3>{this.props.movie.title}</h3>
+                <h2>{this.props.movie.title}</h2>
                 <p>{this.props.movie.description}</p>
-                <h4>Genres:</h4>
+                </Paper>
+            </Grid>
+            <Grid item xs = {12} sm = {4} md = {3}>
+            <Paper className={classes.paper}>
+            <h3>Genres:</h3>
                 <ul className='genreList'>
                 {/* {JSON.stringify(this.props.movie.genres)} */}
                 {this.props.movie.genres.map((genre, index)=>
                     (<li key = {index}>{genre}</li>))}
                 </ul>
-                </Paper>
+            </Paper>
             </Grid>
         </Grid>
         <br/>

@@ -35,7 +35,7 @@ class MovieList extends Component {
     return (
      <Fade down>
         <div className={classes.root}>
-            <Grid container spacing={16}>
+            <Grid container spacing={16} >
                 <Grid item xs = {12}>
                     <Paper className={classes.paper}>
                         <h1>Movie List - Click Poster for Details</h1>
@@ -56,9 +56,9 @@ MovieList.propTypes = {
     classes: PropTypes.object.isRequired
   };
   
-  const mapStateToProps = reduxState => ({
+const mapStateToProps = reduxState => ({
     reduxState,
   });
   
-  export default withStyles(styles)(connect(mapStateToProps)(MovieList));
+export default withStyles(styles)(connect(mapStateToProps)(MovieList));
   
