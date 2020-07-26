@@ -10,6 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Fade from 'react-reveal/Fade'
 
+//this is our css-in-js
 const styles = theme => ({
     root: {
         flexGrow: 1,

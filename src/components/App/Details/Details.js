@@ -19,47 +19,26 @@ const styles = theme => ({
   });
 
 class Details extends Component {
-    state = {}
 
   componentDidMount(){
-    this.props.dispatch({ type: 'FETCH_MOVIE'});
+   // this.props.dispatch({ type: 'FETCH_MOVIE'});
     const id = this.props.match.params.id
-    //populate the details reducer if it is empty
-    console.log('current detail reducer:', this.props.reduxState.details)
-    if(this.props.reduxState.details === {}){
-        this.movieDetailsOnProps(id);}
     //dispatch the GET genre saga with our movie id
+    //all of the movie data for this id lives on the genre reducer now
     this.props.dispatch({ type: 'FETCH_GENRE', payload:id });
   }//end ComponentDidMount
 
-  movieDetailsOnProps = (id) =>{  
-    console.log('in movieDetailsOnProps')
-    const movies = this.props.reduxState.movies;
-    //looping through the movies array to find which one we clicked on,
-    //and dispatches its info to the details reducer so we can access it on refresh
-    for (let i=0; i<movies.length; i++){
-        if (movies[i].id === Number(id) ){
-           // console.log(movies[i].title);
-           this.props.dispatch({type: 'SET_DETAILS', payload:movies[i]})
-           // this.setState(movies[i]);
-        }//end if
-    }//end for
-  }
-
-  navBack = (event) =>{
+  navBack = () =>{
       //history.push will move our dom to the '/' page
       this.props.history.push('/')
-  }
+  }//end navBack
 
   navEdit = () =>{
     this.props.history.push('/edit/' + this.props.match.params.id)
-  }
-
+  }//end navEdit
   
   // Renders the entire app on the DOM
   render() {
-    if(this.props.reduxState.details === {}){
-        this.movieDetailsOnProps(this.props.match.params.id);}
     const { classes } = this.props;
     return (
         <Fade left>
@@ -77,7 +56,6 @@ class Details extends Component {
                         <h3>Genres:</h3>
                         <ul className = 'genreList'>
                             {/* Mapping through the genres to display a list*/}
-                            {JSON.stringify(this.props.reduxState.genres.genres)}
                             {this.props.reduxState.genres.genres.map( ( item, index )=>
                               (  <li key ={index}>{item}</li> ) ) }
                         </ul>

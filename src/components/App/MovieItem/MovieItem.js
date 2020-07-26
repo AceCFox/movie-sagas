@@ -20,24 +20,6 @@ const styles = theme => ({
 
 class MovieItem extends Component {
 
-    movieDetailsOnProps = () =>{
-        const id = this.props.movie.id;
-        const movies = this.props.reduxState.movies;
-        //looping through the movies array to find which one we clicked on,
-        //and dispatches its info to the details reducer so we can access it on refresh
-        for (let i=0; i<movies.length; i++){
-            if (movies[i].id === Number(id) ){
-               // console.log(movies[i].title);
-               this.props.dispatch({type: 'SET_DETAILS', payload:movies[i]})
-               // this.setState(movies[i]);
-            }//end if
-        }//end for
-      }
-  
-  componentDidMount(){
-    
-  }
-  
   // Renders the entire app on the DOM
   render() {
     const {classes} = this.props;
@@ -67,7 +49,6 @@ class MovieItem extends Component {
             <Paper className={classes.paper}>
             <h3>Genres:</h3>
                 <ul className='genreList'>
-                {/* {JSON.stringify(this.props.movie.genres)} */}
                 {this.props.movie.genres.map((genre, index)=>
                     (<li key = {index}>{genre}</li>))}
                 </ul>
