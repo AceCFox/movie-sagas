@@ -24,8 +24,8 @@ class Details extends Component {
    // this.props.dispatch({ type: 'FETCH_MOVIE'});
     const id = this.props.match.params.id
     //dispatch the GET genre saga with our movie id
-    //all of the movie data for this id lives on the genre reducer now
-    this.props.dispatch({ type: 'FETCH_GENRE', payload:id });
+    //all of the movie data for this id lives gets called on the /genre get route
+    this.props.dispatch({ type: 'FETCH_DETAILS', payload:id });
   }//end ComponentDidMount
 
   navBack = () =>{
@@ -49,14 +49,14 @@ class Details extends Component {
                         <Button color = "secondary" onClick = {this.navBack}>Return to List</Button>
                         {'\u00A0'} {'\u00A0'} {'\u00A0'}
                         <Button color = "secondary" onClick = {this.navEdit}>Edit</Button>
-                        <h1>{this.props.reduxState.genres.title}</h1>
-                        <img src= {this.props.reduxState.genres.poster} alt = {this.props.reduxState.genres.title}/>
+                        <h1>{this.props.reduxState.details.title}</h1>
+                        <img src= {this.props.reduxState.details.poster} alt = {this.props.reduxState.details.title}/>
                         <h3>Description:</h3>
-                        <p>{this.props.reduxState.genres.description}</p>
+                        <p>{this.props.reduxState.details.description}</p>
                         <h3>Genres:</h3>
                         <ul className = 'genreList'>
                             {/* Mapping through the genres to display a list*/}
-                            {this.props.reduxState.genres.genres.map( ( item, index )=>
+                            {this.props.reduxState.details.genres.map( ( item, index )=>
                               (  <li key ={index}>{item}</li> ) ) }
                         </ul>
                     </Paper>

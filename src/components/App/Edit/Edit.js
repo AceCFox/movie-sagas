@@ -40,14 +40,14 @@ const styles = theme => ({
 
 class Edit extends Component {
   state = {title: '', 
-    description: ''};
+    description: '',
+    genres:[]};
 
   componentDidMount(){
     const id = this.props.match.params.id;
-    this.setState(this.props.reduxState.genres);
-    //this.setMovieToState();
-    //dispatch the GET genre saga with our movie id
-    this.props.dispatch({ type: 'FETCH_GENRE', payload:id });
+    //dispatch the GET details saga with our movie id
+    this.props.dispatch({ type: 'FETCH_DETAILS', payload:id });
+    this.setState(this.props.reduxState.details);  
   }//end ComponentDidMount
 
   navBack = (event) =>{
@@ -79,7 +79,8 @@ class Edit extends Component {
       console.log(this.state);
       //dispatch a saga that makes a PUT call with the above info
       this.props.dispatch({ type: 'EDIT_MOVIE', payload:this.state });
-      this.props.dispatch({ type: 'FETCH_GENRE', payload:this.props.match.params.id });
+      //FETCH_DETAILS so that our saga reloads upon submit
+      this.props.dispatch({ type: 'FETCH_DETAILS', payload:this.props.match.params.id });
       this.navBack(event);
   }//end handleSubmit
 
@@ -129,7 +130,7 @@ class Edit extends Component {
                     <h3>Genres:</h3>
                     <ul className = 'genreList'>
                         {/* Mapping through the genres to display a list*/}
-                        {this.props.reduxState.genres.genres.map( (genre, index) =>
+                        {this.state.genres.map( (genre, index) =>
                             <li key ={index}>{genre}</li>)}
                     </ul> 
                 </Paper>

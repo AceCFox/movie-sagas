@@ -7,10 +7,7 @@ import Details from './Details/Details'
 import Edit from './Edit/Edit'
 
 class App extends Component {
-  // calls saga with GET on page load
-  componentDidMount(){
-    this.props.dispatch({type: 'FETCH_MOVIE'})
-  }
+ 
 
   // Renders the entire app on the DOM
   render() {

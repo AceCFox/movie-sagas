@@ -10,7 +10,7 @@ app.use(express.static('build'));
 
 /** ---------- ROUTES ---------- **/
 app.get('/movie', (req, res) => {
-    // return all movies
+    // return all movies with an aggregate array of genres
     const queryText = 
     `Select"title", "description", "poster", "movies"."id", array_agg(name) "genres" 
     FROM "movies"
@@ -28,8 +28,9 @@ app.get('/movie', (req, res) => {
         });//end query
 });//end movie.get
 
+//This is called a genre route but it returns all the details for a specific movie
 app.get('/genre:id', (req,res)=>{
-    //return all genres for a movie, based on movie id
+    //return all details (including genre agg) for a movie, based on movie id
     console.log('in genre GET', req.params.id)
     const queryString = 
         `Select"title", "description", "poster", "movies"."id", array_agg(name) "genres" FROM "movies"
@@ -46,9 +47,10 @@ app.get('/genre:id', (req,res)=>{
         res.sendStatus(500);
     });//end query  
 })//end genre:id.get
+// ^ this is poorly named, sorry
 
 app.put('/movie:id', (req,res)=>{
-    //return all genres for a movie, based on movie id
+    //updates a movie title and/or description based on the movie id
     console.log('in movie PUT', req.params.id, req.body.payload.title);
     const queryString = 
         `UPDATE "movies"
