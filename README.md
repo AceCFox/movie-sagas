@@ -6,9 +6,12 @@ _Duration: Weekend Sprint_
 
 This application offers a user access to a databadse of movies, crosreferenced with a variety of genres.  Upon clicking a movie, a user is brought to a details view where they can then navigate back to the list or chose to edit the chosen movie's title or description. From the edit view, the user can choose to save or discard their changes and will be brought back to the chosen film's details, where their changes will be reflected if saved.
 
-## Screen Shot
+## Screen Shots
 
+### List View:
 ![List View](/public/images/movieList.png)
+
+### Edit view:
 ![edit view](/public/images/editView.png)
 
 ### Prerequisites
@@ -26,14 +29,13 @@ This application offers a user access to a databadse of movies, crosreferenced w
 6. The `npm run client` command will open up a new browser tab for you!
 
 ## Usage
-How does someone use this application? Tell a user story here.
 
-1. View the list of movies
-2. Click on the poster for the movie you would like to select
-3. From the details view, click 'edit' or 'back to movie list'
-4. in the edit view, type in changes to to the title or description
-5. when satisfied click 'save changes' to be redirected to the updated details view
-6. to exit back to details view without saving changes, click 'cancel'
+1. View the list of movies, and make your selection.
+2. Click on the poster for the movie you would like to select.
+3. From the details view, click 'edit' or 'back to movie list'.
+4. in the edit view, type in changes to to the title or description.
+5. when satisfied click 'save changes' to be redirected to the updated details view.
+6. to exit back to details view without saving changes, click 'cancel'.
 
 
 ## Built With
