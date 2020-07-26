@@ -70,15 +70,16 @@ class Details extends Component {
                         <Button color = "secondary" onClick = {this.navBack}>Return to List</Button>
                         {'\u00A0'} {'\u00A0'} {'\u00A0'}
                         <Button color = "secondary" onClick = {this.navEdit}>Edit</Button>
-                        <h1>{this.props.reduxState.details.title}</h1>
-                        <img src= {this.props.reduxState.details.poster} alt = {this.props.reduxState.details.title}/>
+                        <h1>{this.props.reduxState.genres.title}</h1>
+                        <img src= {this.props.reduxState.genres.poster} alt = {this.props.reduxState.genres.title}/>
                         <h3>Description:</h3>
-                        <p>{this.props.reduxState.details.description}</p>
+                        <p>{this.props.reduxState.genres.description}</p>
                         <h3>Genres:</h3>
                         <ul className = 'genreList'>
                             {/* Mapping through the genres to display a list*/}
-                            {this.props.reduxState.genres.map(genre =>
-                                <li key ={genre.id}>{genre.name}</li>)}
+                            {JSON.stringify(this.props.reduxState.genres.genres)}
+                            {this.props.reduxState.genres.genres.map( ( item, index )=>
+                              (  <li key ={index}>{item}</li> ) ) }
                         </ul>
                     </Paper>
                 </Grid>

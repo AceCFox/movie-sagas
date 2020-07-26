@@ -43,7 +43,7 @@ class Edit extends Component {
 
   componentDidMount(){
     const id = this.props.match.params.id;
-    this.setState(this.props.reduxState.details);
+    this.setState(this.props.reduxState.genres);
     //this.setMovieToState();
     //dispatch the GET genre saga with our movie id
     this.props.dispatch({ type: 'FETCH_GENRE', payload:id });
@@ -78,6 +78,7 @@ class Edit extends Component {
       console.log(this.state);
       //dispatch a saga that makes a PUT call with the above info
       this.props.dispatch({ type: 'EDIT_MOVIE', payload:this.state });
+      this.props.dispatch({ type: 'FETCH_GENRE', payload:this.props.match.params.id });
       this.navBack(event);
   }//end handleSubmit
 
@@ -127,8 +128,8 @@ class Edit extends Component {
                     <h3>Genres:</h3>
                     <ul className = 'genreList'>
                         {/* Mapping through the genres to display a list*/}
-                        {this.props.reduxState.genres.map(genre =>
-                            <li key ={genre.id}>{genre.name}</li>)}
+                        {this.props.reduxState.genres.genres.map( (genre, index) =>
+                            <li key ={index}>{genre}</li>)}
                     </ul> 
                 </Paper>
             </Grid>

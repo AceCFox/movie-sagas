@@ -37,7 +37,7 @@ function* getGenres(action){
     try{
         //axios call to get movies on route /genre
         const response = yield axios.get('/genre'+ action.payload);
-        yield put({type:'SET_GENRES', payload: response.data});
+        yield put({type:'SET_GENRES', payload: response.data[0]});
     } catch (error){
         alert('unable to access server at this time');
         console.log('Error on genre GET:', error);
@@ -73,7 +73,7 @@ const movies = (state = [], action) => {
 }
 
 // Used to store the movie genres
-const genres = (state = [], action) => {
+const genres = (state = {genres:[]}, action) => {
     switch (action.type) {
         case 'SET_GENRES':
             return action.payload;

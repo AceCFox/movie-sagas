@@ -32,11 +32,11 @@ app.get('/genre:id', (req,res)=>{
     //return all genres for a movie, based on movie id
     console.log('in genre GET', req.params.id)
     const queryString = 
-        `SELECT "genres"."name", "genres"."id" 
-        FROM "movies"
+        `Select"title", "description", "poster", "movies"."id", array_agg(name) "genres" FROM "movies"
         JOIN "movie_genre" on "movies"."id" = "movie_genre"."movie_id"
         JOIN "genres" on "movie_genre"."genre_id" = "genres"."id"
-        WHERE "movies"."id" = $1;`
+        WHERE "movies"."id" = $1
+        GROUP BY "movies"."id";`
     pool.query(queryString, [req.params.id])
     .then( (result) => {
         res.send(result.rows);
