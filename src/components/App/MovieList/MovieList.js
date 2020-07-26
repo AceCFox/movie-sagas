@@ -19,7 +19,7 @@ const styles = theme => ({
     },
 
     html: {
-    height: 4100,
+    height: 3500,
     },
   });
 
