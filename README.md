@@ -4,7 +4,7 @@
 
 _Duration: Weekend Sprint_
 
-This application offers a user access to a databadse of movies, crosreferenced with a variety of genres.  Upon clicking a movie, a user is brought to a details view where they can then navigate back to the list or chose to edit the chosen movie's title or description. From the edit view, the user can choose to save or discard their changes and will be brought back to the chosen film's details, where their changes will be reflected if saved.
+This application offers a user access to a database table of movies, cross-referenced with a variety of genres.  Upon clicking a movie, a user is brought to a details view where they can then navigate back to the list or chose to edit the chosen movie's title or description. From the edit view, the user can choose to save or discard their changes and will be brought back to the chosen film's details, where their changes will be reflected if saved.
 
 ## Screen Shots
 
